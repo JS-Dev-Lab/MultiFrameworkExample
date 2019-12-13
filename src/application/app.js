@@ -12,7 +12,7 @@ function run(uiEngine, ajax) {
           s.loading = true;
           s.status = null;
         });
-        const res = await ajax.get(`http://cors-anywhere.herokuapp.com/api.tronalddump.io/search/quote?query=${search}`);
+        const res = await ajax.get(`api.tronalddump.io/search/quote?query=${search}`);
         view = view.update(s => {
           s.loading = false;
           s.result = res;

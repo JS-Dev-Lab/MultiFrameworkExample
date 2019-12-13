@@ -1,15 +1,11 @@
-import axios from "axios";
-
-const instance = axios.create({
-  headers: { "X-Requested-With": "XMLHttpRequest" }
-});
+import {get} from "axios";
 
 class Ajax {
   async get(url) {
-    const res = await instance.get(url);
+    const res = await get(`http://${url}`);
     return res.data;
   }
 }
 
 const ajax = new Ajax();
-export { ajax }
+export { ajax };

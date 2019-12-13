@@ -1,7 +1,7 @@
 const { UiEngine } = require("./consoleEngine");
 const { run } = require("../application/app");
 const { ajax } = require("../infra/axiosAjax");
-const { prompt } = require('inquirer');
+const { prompt } = require("inquirer");
 
 const render = async (state, print, ask) => {
   if (state.loading) {
@@ -22,28 +22,28 @@ const render = async (state, print, ask) => {
   }
 
   await ask(state);
-}
+};
 
-async function enterQuery() {
-  const answer = prompt([
-    {
-      type: 'input',
-      name: 'query',
-      message: 'Enter search term'
-    }
-  ]);
-  return answer;
-}
-
-const ask = async (state) => {
+const ask = async state => {
   const { query } = await enterQuery();
   if (query === "") {
     return;
   }
   state.commands.load(query);
+};
+
+function enterQuery() {
+  const answer = prompt([
+    {
+      type: "input",
+      name: "query",
+      message: "Enter search term"
+    }
+  ]);
+  return answer;
 }
 
-const fullRender = (state) => render(state, console.log, ask);
+const fullRender = state => render(state, console.log, ask);
 const engine = new UiEngine(fullRender);
 
 run(engine, ajax);
