@@ -4,12 +4,11 @@ const { ajax } = require("../infra/axiosAjax");
 const { prompt } = require("inquirer");
 
 const render = async (state, print, ask) => {
-  if (state.loading) {
-    print("loading");
-    return;
-  }
-
   switch (state.status) {
+    case "loading":
+      print("loading...");
+      return;
+
     case "nothing found":
       print("nothing found");
       break;
