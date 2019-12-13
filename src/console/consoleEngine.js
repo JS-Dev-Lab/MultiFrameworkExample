@@ -1,5 +1,5 @@
 class UiEngine {
-  constructor( render) {
+  constructor(render) {
     this._render = render;
   }
 
@@ -12,7 +12,7 @@ class View {
   constructor(state, render) {
     this._state = Object.freeze(state);
     this._render = render;
-    render(this._state);
+    render(this._state, console.log);
   }
 
   update(updater) {

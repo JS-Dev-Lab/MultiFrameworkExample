@@ -3,7 +3,7 @@ const { run } = require("../application/app");
 const { ajax } = require("../infra/axiosAjax");
 const { prompt } = require("inquirer");
 
-const render = async (state, print, ask) => {
+const render = async (state, print) => {
   switch (state.status) {
     case "loading":
       print("loading...");
@@ -42,7 +42,6 @@ function enterQuery() {
   return answer;
 }
 
-const fullRender = state => render(state, console.log, ask);
-const engine = new UiEngine(fullRender);
+const engine = new UiEngine(render);
 
 run(engine, ajax);
