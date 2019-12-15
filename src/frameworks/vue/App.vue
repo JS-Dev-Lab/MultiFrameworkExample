@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>{{state.name}}</h1>
-    <input v-model="query" />
+    <input v-model="query"  @keyup.enter="search"/>
     <button @click="search">Search</button>
     <p v-if="state.status==='loading'">loading...</p>
     <ul v-else-if="state.status==='found result'">
