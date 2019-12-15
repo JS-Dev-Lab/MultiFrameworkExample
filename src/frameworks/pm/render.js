@@ -1,9 +1,16 @@
-function render({ array, name, count }) {
-  return `<h1>Hello ${name}</h1>
- <input value="${name}" onInput="state.commands.setName(event.target.value)"></input>
- <p>${name.length}</p>
- <p>${count}</p><button onClick="state.commands.add()">My button</button>
- <ul>${array.map(value => `<li>${value}</li>`).join("")}</ul>`;
+function render({ name, status, lastSearch, result}) {
+  return `
+    <h1>${name}</h1>
+    <form onsubmit="state.commands.load(this.query.value)">
+      <input type="text" name="query" value="${lastSearch}"/>
+      <button>Search</button>
+    </form>
+    ${status==='loading' ? "<p>loading...</p>" :
+    (status!=='found result') ? `<p>${status||''}</p>`:
+      `<ul>
+      ${result._embedded.quotes.map(quote => `<li>${quote.value}</li>`).join("")}
+      </ul>`
+    }`;
 }
 
 export { render };

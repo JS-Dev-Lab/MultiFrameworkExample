@@ -1,7 +1,7 @@
 function run(uiEngine, ajax) {
   let view = uiEngine.initialRender({
     name: "Citation application",
-    error: null,
+    lastSearch: "",
     status: null,
     result: null,
     commands: {
@@ -9,6 +9,7 @@ function run(uiEngine, ajax) {
         view = view.update(s => {
           s.result = null;
           s.status = "loading";
+          s.lastSearch = search;
         });
         const res = await ajax.get(
           `api.tronalddump.io/search/quote?query=${search}`
