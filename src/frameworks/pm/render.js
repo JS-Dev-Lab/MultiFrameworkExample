@@ -1,7 +1,7 @@
 function render({ name, status, lastSearch, result}) {
   return `
     <h1>${name}</h1>
-    <form onsubmit="state.commands.load(this.query.value)">
+    <form onsubmit="state.commands.load(this.query.value);event.preventDefault();">
       <input type="text" name="query" value="${lastSearch}"/>
       <button>Search</button>
     </form>
