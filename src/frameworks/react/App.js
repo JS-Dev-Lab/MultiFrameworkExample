@@ -3,22 +3,53 @@ import React, { Component } from "react";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...props.state };
+    this.state = { ...props.state, query: "" };
   }
 
   render() {
-    const { state } = this;
-    const { commands: { add, setName } } = state;
-    const onChange = event => {
-      setName(event.target.value);
+    const {
+      state: { query, status, name, result },
+      props: {
+        commands: { load }
+      }
+    } = this;
+    const onSubmit = evt => {
+      evt.preventDefault();
+      load(this.state.query);
     };
+    const onChange = evt => {
+      this.setState({ query: evt.target.value });
+    };
+
+    let mainResult;
+
+    switch (status) {
+      case "loading":
+        mainResult = <p>loading...</p>;
+        break;
+
+      case "found result":
+        mainResult = (
+          <ul>
+            {result._embedded.quotes.map(quote => (
+              <li key={quote.value}>{quote.value}</li>
+            ))}
+          </ul>
+        );
+        break;
+
+      default:
+        mainResult = <p>{status || ""}</p>;
+    }
+
     return (
       <div className="App">
-        <h1>Hello {state.name}</h1>
-        <input value={state.name} onChange={onChange}></input>
-        <p>{state.name.length}</p>
-        <p>{state.count}</p>
-        <button onClick={add}>My button</button>
+        <h1>{name}</h1>
+        <form onSubmit={onSubmit}>
+          <input type="text" name="query" value={query} onChange={onChange} />
+          <button>Search</button>
+        </form>
+        {mainResult}
       </div>
     );
   }

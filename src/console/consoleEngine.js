@@ -1,25 +1,30 @@
-class UiEngine {
-  constructor(render) {
-    this._render = render;
-  }
-
-  initialRender(state) {
-    return new View({ ...state }, this._render);
+function viewCreatorFactory(render) {
+  return ({ state, commands }) => {
+    return new View({ state: { ...state }, commands }, render);
   }
 }
 
 class View {
-  constructor(state, render) {
-    this._state = Object.freeze(state);
+  constructor({ state, commands }, render) {
+    this._commands = commands;
     this._render = render;
-    render(this._state, console.log);
+    this.fullUpdate(state);
   }
 
   update(updater) {
     const newState = { ...this._state };
     updater(newState);
-    return new View(newState, this._render);
+    this.fullUpdate(newState);
+  }
+
+  get state() {
+    return this._state;
+  }
+
+  fullUpdate(state) {
+    this._state = Object.freeze(state);
+    this._render({ state: this._state, commands: this._commands }, console.log);
   }
 }
 
-export { UiEngine };
+export { viewCreatorFactory };

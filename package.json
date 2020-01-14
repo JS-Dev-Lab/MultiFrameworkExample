@@ -1,19 +1,19 @@
 {
-  "name": "multi-framework-app",
+  "name": "mvi-application",
   "version": "1.0.1",
-  "description": "DIY UI framework",
+  "description": "MVI application",
   "main": "dist/main.js",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "webpack --mode=production --default=pm",
-    "serve": "webpack-dev-server --open --mode=development --default=pm"
+    "build": "webpack --mode=production",
+    "serve": "webpack-dev-server --open --mode=development --default=vue"
   },
-  "repository": "git+https://github.com/David-Desmaisons/wtuif.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Desmaisons/wtuif.git"
+  },
   "keywords": [
-    "ui",
-    "framework",
-    "javascript",
-    "DIY"
+    "mvi"
   ],
   "author": "David Desmaisons",
   "license": "MIT",
@@ -79,9 +79,14 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.1",
     "esm": "^3.2.25",
-    "inquirer": "^7.0.0",
-    "lit-html": "^1.1.2"
+    "inquirer": "^7.0.3",
+    "lit-html": "^1.1.2",
+    "mvi.core": "^1.2.0",
+    "mvi.lit-html": "^1.2.0",
+    "mvi.react": "^1.2.0",
+    "mvi.vanilla": "^1.2.0",
+    "mvi.vue": "^1.2.0"
   }
 }

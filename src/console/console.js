@@ -1,9 +1,9 @@
-const { UiEngine } = require("./consoleEngine");
+const { viewCreatorFactory } = require("./consoleEngine");
 const { run } = require("../application/app");
 const { ajax } = require("../infra/axiosAjax");
 const { prompt } = require("inquirer");
 
-const render = async (state, print) => {
+const render = async ({ state, commands }, print) => {
   switch (state.status) {
     case "loading":
       print("loading...");
@@ -20,15 +20,15 @@ const render = async (state, print) => {
       break;
   }
 
-  await ask(state);
+  await ask(commands);
 };
 
-const ask = async state => {
+const ask = async commands => {
   const { query } = await enterQuery();
   if (query === "") {
     return;
   }
-  state.commands.load(query);
+  commands.load(query);
 };
 
 function enterQuery() {
@@ -42,6 +42,6 @@ function enterQuery() {
   return answer;
 }
 
-const engine = new UiEngine(render);
+const createView = viewCreatorFactory(render);
 
-run(engine, ajax);
+run(createView, ajax);
