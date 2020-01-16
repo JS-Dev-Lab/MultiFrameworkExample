@@ -1,4 +1,4 @@
-const { viewCreatorFactory } = require("./consoleEngine");
+const { viewCreatorFactory } = require("mvi.console");
 const { run } = require("../application/app");
 const { ajax } = require("../infra/axiosAjax");
 const { prompt } = require("inquirer");

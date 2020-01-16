@@ -83,6 +83,7 @@
     "esm": "^3.2.25",
     "inquirer": "^7.0.3",
     "lit-html": "^1.1.2",
+    "mvi.console": "^1.2.0",
     "mvi.core": "^1.2.0",
     "mvi.lit-html": "^1.2.0",
     "mvi.react": "^1.2.0",
